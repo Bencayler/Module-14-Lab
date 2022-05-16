@@ -87,8 +87,11 @@ public class ThreadTest4 {
                 max = 2*START;
             }
             // System.out.println("(min,max) = " + min + "," + max);  // for testing
-
-            CountPrimesTask oneTask = new CountPrimesTask(min, max);
+            int minNum = min;
+            int maxNum = max;
+            Callable oneTask = () -> {
+                return countPrimes(minNum, maxNum);
+            };
             Future<Integer> oneResult = executor.submit( oneTask );
             results.add(oneResult);  // Save the Future representing the (future) result.
             min = max + 1;
